@@ -7,8 +7,8 @@
 | 日期 | 主题 | 文档 |
 |------|------|------|
 | 6.1 | GPIO 按键控制 LED | [docs/6.1-按键控制LED.md](docs/6.1-按键控制LED.md) |
-| 6.2 | USART 串口通信 | 待整理 |
-| 6.3 | I2C + SPI 通信 | 待整理 |
+| 6.2 | USART 串口通信 | [docs/6.2-USART串口通信.md](docs/6.2-USART串口通信.md) |
+| 6.3 | I2C + SPI 通信 | [docs/6.2-USART串口通信.md](docs/6.2-USART串口通信.md) |
 | ... | ... | ... |
 
 ## 外设覆盖
