@@ -9,7 +9,7 @@
 | 6.1 | GPIO 按键控制 LED | [docs/6.01-按键控制LED.md](docs/6.01-按键控制LED.md) |
 | 6.2 | USART 串口通信 | [docs/6.02-USART串口通信.md](docs/6.02-USART串口通信.md) |
 | 6.3 | I2C + SPI 通信 | [docs/6.02-USART串口通信.md](docs/6.02-USART串口通信.md) |
-| ... | ... |`n| 6.15 | FreeRTOS 入门 | [docs/6.15-FreeRTOS入门.md](docs/6.15-FreeRTOS入门.md) | ... |
+| ... | ... |`n| 6.15 | FreeRTOS 入门 | [docs/6.15-FreeRTOS入门.md](docs/6.15-FreeRTOS入门.md) | ... |`n| 6.16 | FreeRTOS 队列实战 | [docs/6.16-FreeRTOS队列实战.md](docs/6.16-FreeRTOS队列实战.md) |
 
 ## 源码
 
