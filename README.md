@@ -9,12 +9,12 @@
 | 6.1 | GPIO 按键控制 LED | [docs/6.01-按键控制LED.md](docs/6.01-按键控制LED.md) |
 | 6.2 | USART 串口通信 | [docs/6.02-USART串口通信.md](docs/6.02-USART串口通信.md) |
 | 6.3 | I2C + SPI 通信 | [docs/6.02-USART串口通信.md](docs/6.02-USART串口通信.md) |
-| ... | ... |`n| 6.15 | FreeRTOS 入门 | [docs/6.15-FreeRTOS入门.md](docs/6.15-FreeRTOS入门.md) | ... |`n| 6.16 | FreeRTOS 队列实战 | [docs/6.16-FreeRTOS队列实战.md](docs/6.16-FreeRTOS队列实战.md) |`n| 6.17 | 二进制信号量 | [docs/6.17-二进制信号量.md](docs/6.17-二进制信号量.md) |
+| ... | ... |`n| 6.15 | FreeRTOS 入门 | [docs/6.15-FreeRTOS入门.md](docs/6.15-FreeRTOS入门.md) | ... |`n| 6.16 | FreeRTOS 队列实战 | [docs/6.16-FreeRTOS队列实战.md](docs/6.16-FreeRTOS队列实战.md) |`n| 6.17 | 二进制信号量 | [docs/6.17-二进制信号量.md](docs/6.17-二进制信号量.md) |`n| 6.17 | 二进制信号量 | [docs/6.17-二进制信号量.md](docs/6.17-二进制信号量.md) |
 
 ## 源码
 
 - `源码1/` — Practice 基础练习工程
-- `源码2/` — Timer 定时器工程
+- `源码2/`n- `Integrated_Project/` — 6.18 综合项目 FreeRTOS 重构工程` — Timer 定时器工程
 
 > 使用 B站 [铁头山羊](https://space.bilibili.com/471714251) 的库文件
 
