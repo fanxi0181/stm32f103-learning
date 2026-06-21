@@ -86,3 +86,14 @@ Integrated_Project/Core/Inc/FreeRTOSConfig.h
 **/.vscode/keil-assistant.log
 **/.vscode/uv4.log
 **/.vscode/uv4.log.lock
+
+# ========== 字体文件（二进制）==========
+**/font/ttfttc/
+**/font/*.exe
+**/font/*.dll
+**/font/.map
+
+# ========== ST 模板文件 ==========
+**/stm32f10x_conf.h
+**/stm32f10x_it.c
+**/stm32f10x_it.h
