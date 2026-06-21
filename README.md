@@ -1,5 +1,7 @@
 # STM32F103C8T6 嵌入式开发学习记录
 
+> 🎬 [演示视频（百度网盘）](https://pan.baidu.com/s/14usbNr9H3obMVWUMUVIfXg) — 提取码：`1111`
+
 > **环境**：VSCode + Keil + Keil Assistant → CubeMX + FreeRTOS  
 > **库文件**：B站 [铁头山羊](https://space.bilibili.com/471714251) 标准外设库 / HAL 库  
 > **方法**：闭卷默写 → 烧录验证 → 错误复盘 → 重构优化
@@ -103,3 +105,4 @@
 - [x] ADC（常规/注入/扫描/定时器触发）
 - [x] OLED（I2C 驱动、回调适配）
 - [x] FreeRTOS（任务、队列、信号量、互斥锁）
+
