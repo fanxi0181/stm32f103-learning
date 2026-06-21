@@ -1,7 +1,88 @@
-# ========== 原始学习资料（仅保留提炼后的文档）========== 6.1/ 6.2/ 6.3/ 6.4/ 6.5/ 6.6/ 6.7/ 6.9/ 6.10/ 6.11/ 6.14/ 6.15/ 6.16/ 6.17/ 6.18/ 6.19/ qt/ *.docx 背景参考.txt 时钟树.txt 指针.txt 综合练习.txt 最小systick.txt 26.新.每日任务.txt 26.新.每日总结.md 6.7-新学习部分-每日作业.txt 每日心得-stm32-格式化v2.docx 前-stm32-心得.md  # ========== Keil 编译产物 ========== *.o *.d *.crf *.htm *.dep *.map *.bak *.lnp *.lst *.ini *.iex *.tra *.uvguix.* *.scvd JLinkLog.txt RTE/ Listings/ Objects/ DebugConfig/  # ========== 标准外设库（ST官方，非用户代码）========== **/startup/ **/std_periph_driver/ **/system_stm32f10x.*  # ========== CubeMX 自动生成（HAL库/中间件）========== Integrated_Project/Drivers/ Integrated_Project/Middlewares/ Integrated_Project/MDK-ARM/ Integrated_Project/Core/Src/gpio.c Integrated_Project/Core/Src/i2c.c Integrated_Project/Core/Src/spi.c Integrated_Project/Core/Src/usart.c Integrated_Project/Core/Src/stm32f1xx_hal_msp.c Integrated_Project/Core/Src/stm32f1xx_hal_timebase_tim.c Integrated_Project/Core/Src/stm32f1xx_it.c Integrated_Project/Core/Src/system_stm32f1xx.c Integrated_Project/Core/Inc/gpio.h Integrated_Project/Core/Inc/i2c.h Integrated_Project/Core/Inc/spi.h Integrated_Project/Core/Inc/usart.h Integrated_Project/Core/Inc/stm32f1xx_hal_conf.h Integrated_Project/Core/Inc/stm32f1xx_it.h Integrated_Project/Core/Inc/main.h Integrated_Project/Core/Inc/FreeRTOSConfig.h 
+# ========== 原始学习资料（仅保留提炼后的文档）==========
+6.1/
+6.2/
+6.3/
+6.4/
+6.5/
+6.6/
+6.7/
+6.9/
+6.10/
+6.11/
+6.14/
+6.15/
+6.16/
+6.17/
+6.18/
+6.19/
+qt/
+简历文件/
+*.docx
+背景参考.txt
+时钟树.txt
+指针.txt
+综合练习.txt
+最小systick.txt
+26.新.每日任务.txt
+26.新.每日总结.md
+6.7-新学习部分-每日作业.txt
+每日心得-stm32-格式化v2.docx
+前-stm32-心得.md
 
-# VSCode/Keil 临时文件
+# ========== Keil 编译产物 ==========
+*.o
+*.d
+*.crf
+*.htm
+*.dep
+*.map
+*.bak
+*.lnp
+*.lst
+*.ini
+*.iex
+*.tra
+*.uvguix.*
+*.scvd
+JLinkLog.txt
+RTE/
+Listings/
+Objects/
+DebugConfig/
+
+# ========== 标准外设库（ST官方，非用户代码）==========
+**/startup/
+**/std_periph_driver/
+**/system_stm32f10x.*
+
+# ========== CubeMX 自动生成（HAL库/中间件）==========
+Integrated_Project/Drivers/
+Integrated_Project/Middlewares/
+Integrated_Project/MDK-ARM/
+Integrated_Project/Core/Src/gpio.c
+Integrated_Project/Core/Src/i2c.c
+Integrated_Project/Core/Src/spi.c
+Integrated_Project/Core/Src/usart.c
+Integrated_Project/Core/Src/stm32f1xx_hal_msp.c
+Integrated_Project/Core/Src/stm32f1xx_hal_timebase_tim.c
+Integrated_Project/Core/Src/stm32f1xx_it.c
+Integrated_Project/Core/Src/system_stm32f1xx.c
+Integrated_Project/Core/Inc/gpio.h
+Integrated_Project/Core/Inc/i2c.h
+Integrated_Project/Core/Inc/spi.h
+Integrated_Project/Core/Inc/usart.h
+Integrated_Project/Core/Inc/stm32f1xx_hal_conf.h
+Integrated_Project/Core/Inc/stm32f1xx_it.h
+Integrated_Project/Core/Inc/main.h
+Integrated_Project/Core/Inc/FreeRTOSConfig.h
+
+# ========== VSCode/Keil 临时文件 ==========
 *.VSIX
 *.lin
 *.uvoptx
 清理.cmd
+
+# VSCode Keil Assistant 日志
+**/.vscode/keil-assistant.log
+**/.vscode/uv4.log
+**/.vscode/uv4.log.lock
