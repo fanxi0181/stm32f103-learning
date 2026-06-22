@@ -58,14 +58,14 @@ const osThreadAttr_t KEY_Task_attributes = {
 osThreadId_t LED_TaskHandle;
 const osThreadAttr_t LED_Task_attributes = {
   .name = "LED_Task",
-  .stack_size = 128 * 4,
+  .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for USART_Task */
 osThreadId_t USART_TaskHandle;
 const osThreadAttr_t USART_Task_attributes = {
   .name = "USART_Task",
-  .stack_size = 512 * 4,
+  .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityHigh1,
 };
 /* Definitions for OLED_Task */
@@ -79,13 +79,20 @@ const osThreadAttr_t OLED_Task_attributes = {
 osThreadId_t W25Q64_TaskHandle;
 const osThreadAttr_t W25Q64_Task_attributes = {
   .name = "W25Q64_Task",
-  .stack_size = 1024 * 4,
+  .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal2,
 };
 /* Definitions for PA11Flick_Task */
 osThreadId_t PA11Flick_TaskHandle;
 const osThreadAttr_t PA11Flick_Task_attributes = {
   .name = "PA11Flick_Task",
+  .stack_size = 64 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
+/* Definitions for Test_CPU_usage */
+osThreadId_t Test_CPU_usageHandle;
+const osThreadAttr_t Test_CPU_usage_attributes = {
+  .name = "Test_CPU_usage",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
@@ -126,6 +133,7 @@ void vIP_USARTTask(void *argument);
 void vIP_OLEDTask(void *argument);
 void vIP_W25Q64Task(void *argument);
 void vIP_PA11Flick(void *argument);
+void T_CPU_U_Task(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -190,6 +198,9 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of PA11Flick_Task */
   PA11Flick_TaskHandle = osThreadNew(vIP_PA11Flick, NULL, &PA11Flick_Task_attributes);
+
+  /* creation of Test_CPU_usage */
+  Test_CPU_usageHandle = osThreadNew(T_CPU_U_Task, NULL, &Test_CPU_usage_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -307,6 +318,24 @@ __weak void vIP_PA11Flick(void *argument)
     osDelay(1);
   }
   /* USER CODE END vIP_PA11Flick */
+}
+
+/* USER CODE BEGIN Header_T_CPU_U_Task */
+/**
+* @brief Function implementing the Test_CPU_usage thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_T_CPU_U_Task */
+__weak void T_CPU_U_Task(void *argument)
+{
+  /* USER CODE BEGIN T_CPU_U_Task */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END T_CPU_U_Task */
 }
 
 /* Private application code --------------------------------------------------*/

@@ -1,14 +1,10 @@
-/*
- * My_Code1.c
- *
- *  Created on: Jun 18, 2026
- *      Author: lin
- */
-
-
-
+//My_Code1.c
 
 #include "My_Code1.h"
+#include "My_Code3.h"
+
+
+#ifdef SIX_MODULE_LINGKAGE_FREERTOS_ENABLED
 
 uint8_t rxData;
 uint32_t current_time = 0;
@@ -63,13 +59,11 @@ void vIP_USARTTask(void *argument)
                     }
                     else
                     {
-                        char err[] = "Invalid_input";
-                        HAL_UART_Transmit(&huart1,(uint8_t *)err,strlen(err),100);
+                        UART_DMA_Printf("Invalid_input\r\n");
                     }
                     if(osMessageQueuePut(USART_QueueHandle,&usartmessage,0,pdMS_TO_TICKS(100)) != osOK)
                     {
-                        char err[] = "usartQueue_err";
-                        HAL_UART_Transmit(&huart1,(uint8_t *)err,strlen(err),100);
+                        UART_DMA_Printf("usartQueue_err\r\n");
                     }
                     index = 0;
                     memset(cmdbuff,0,sizeof(cmdbuff));
@@ -172,8 +166,7 @@ void vIP_LEDTask(void *argument)
             }      
         default:
             {
-                char err[] = "ledtask_err";
-                HAL_UART_Transmit(&huart1,(uint8_t *)err,strlen(err),100);
+                UART_DMA_Printf("ledtask_err\r\n");
                 break;
             }
         }
@@ -211,8 +204,7 @@ void Init_OLED(void)
     HAL_I2C_Master_Receive(&hi2c1,0x78,&rcvd,sizeof(rcvd),HAL_MAX_DELAY);
     if((rcvd & (0x01 << 6)) == 0)
     {
-        char rcvd[] = "OLED_OK";
-        HAL_UART_Transmit(&huart1,(uint8_t *)rcvd,strlen(rcvd),100);        
+        UART_DMA_Printf("OLED_OK\r\n");        
     }
 }
 
@@ -244,8 +236,7 @@ void vIP_KEYTask(void *argument)
 
         if(osMessageQueuePut(KEY_QueueHandle,&msg,0,0) != osOK)
         {
-            char err[] = "Queue_Full\n";
-            HAL_UART_Transmit(&huart1, (uint8_t*)err, strlen(err), 100);
+            UART_DMA_Printf("Queue_Full\r\n");
         }
     }
 }
@@ -272,8 +263,7 @@ void vIP_W25Q64Task(void *argument)
                 {
                     W25Q64_Save_State(LEDOFF);
                 }
-                char msg[] = "save_sucess";
-                HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg), 100);                
+                UART_DMA_Printf("save_sucess\r\n");              
             }
             else if(msg.w25q64_state == W25Q64_State_Recovery)
             {
@@ -292,8 +282,7 @@ void vIP_W25Q64Task(void *argument)
                 {
                     g_state.oled = OLED_State_Display3;
                 }
-                char msg[] = "rcvy_sucess";
-                HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg), 100);                   
+                UART_DMA_Printf("rcvy_sucess\r\n");                    
             }
         }
         osDelay(pdMS_TO_TICKS(10));       
@@ -362,3 +351,4 @@ void W25Q64_WaitBusy(void) {
     } while (status & 0x01);
 }
 
+#endif //SIX_MODULE_LINGKAGE_FREERTOS
