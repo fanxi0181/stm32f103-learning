@@ -4,7 +4,7 @@
 
 #if defined(HAL_UART_MODULE_ENABLED)
     uint8_t tx_dma_buffer[TX_DMA_BUFFER_SIZE] = {0};
-    uint8_t rx_dma_buffer[RX_DMA_BURRER_SIZE] = {0};
+    uint8_t rx_dma_buffer[RX_DMA_BUFFER_SIZE] = {0};
     uint8_t RX_RCV_Flish_Flag = 0;
     
     void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
@@ -14,11 +14,11 @@
             if(RX_RCV_Flish_Flag == 0)
             {
                 RX_RCV_Flish_Flag = 1;
-                if(Size < RX_DMA_BURRER_SIZE)
+                if(Size < RX_DMA_BUFFER_SIZE)
                 {
                     rx_dma_buffer[Size] = '\0';
                 }
-                HAL_UARTEx_ReceiveToIdle_DMA(&ADD_DMA_USART,rx_dma_buffer,RX_DMA_BURRER_SIZE);
+                HAL_UARTEx_ReceiveToIdle_DMA(&ADD_DMA_USART,rx_dma_buffer,RX_DMA_BUFFER_SIZE);
             }
         }
     }
@@ -51,7 +51,7 @@ float kd = 0;
 void T_CPU_U_Task(void *argument)
 {
     HAL_TIM_Base_Start_IT(&htim3);
-    HAL_UARTEx_ReceiveToIdle_DMA(&ADD_DMA_USART,rx_dma_buffer,RX_DMA_BURRER_SIZE);//首先开启回调中断
+    HAL_UARTEx_ReceiveToIdle_DMA(&ADD_DMA_USART,rx_dma_buffer,RX_DMA_BUFFER_SIZE);//首先开启回调中断
     for(;;)
     {
         if(tim3_finish_flag)
@@ -83,3 +83,4 @@ void My_TIM3_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     }
 }
 #endif //TEST_CPU_USAGE_ENABLED
+
