@@ -1,4 +1,4 @@
-# STM32F103C8T6 嵌入式开发学习记录
+# STM32F103C8T6 嵌入式开发实践
 
 > 🎬 [演示视频（B站）](https://www.bilibili.com/video/BV1RFjo64Ew1/)
 
@@ -12,10 +12,9 @@
 
 - **大二**：通过学校作业（循迹小车、阿里云智慧家居）接触嵌入式开发，熟悉了传感器驱动、蓝牙通信、云平台对接等基本概念
 - **2025 下半年**：系统学习 STM32，参与机器狗实训，自学 C 语言和标准外设库
-- **2026 上半年**：持续深入外设驱动、中断系统、RTOS 等，积累裸机练习代码
-- **2026.06**：开始用 Git 统一管理，将之前的练习和项目重新闭卷手写整理，逐日提交至本仓库
+- **2026 上半年**：持续深入外设驱动、中断系统、RTOS 等，积累底层驱动代码
+- **2026.06**：开始用 Git 统一管理，将之前的代码和项目重新闭卷手写整理，逐日提交至本仓库
 
-> 6 月之前的练习分散在各处，6 月开始统一用 Git 管理，将积累的代码重新手写整理后逐日提交。
 
 ---
 
@@ -23,7 +22,7 @@
 
 | 项目 | 说明 | 技术栈 |
 |------|------|--------|
-| `01-BareMetal-Practice/` | 裸机综合练习（GPIO→ADC 全部外设） | 标准外设库 + Keil |
+| `01-BareMetal-Practice/` | 裸机综合实践（GPIO→ADC 全部外设） | 标准外设库 + Keil |
 | `02-Timer-Exercises/` | 定时器专项（PWM/输入捕获/主从模式） | 标准外设库 + Keil |
 | `Integrated_Project/` | 综合项目 FreeRTOS 重构 | CubeMX + HAL + FreeRTOS |
 
@@ -53,7 +52,7 @@ Integrated_Project/
 │   ├── led_task.c/h         #   LED 控制 + OLED 刷新 + 阈值指示灯
 │   ├── usart_task.c/h       #   串口接收 → CLI 命令入口
 │   ├── uart_dma.c/h         #   UART1 DMA 打印（带互斥锁 printf 替代）
-│   ├── cli.c/h              #   CLI 命令解析器（led/dst/lux/help/set）
+│   ├── cli.c/h              #   CLI 命令解析器（led/dist/lux/help/set/w25q64）
 │   ├── w25q64.c/h           #   SPI Flash 保存/恢复（阈值持久化）
 │   ├── oled_task.c/h        #   OLED 初始化 + 状态显示
 │   ├── ps_sensor.c/h        #   光敏传感器（ADC1 注入 + TIM1 TRGO）
@@ -99,8 +98,8 @@ Integrated_Project/
     │          │    │          │    │          │
     │ led on   │    │ USART    │    │ vIP_LED  │
     │ led off  │    │  Queue   │    │  Task    │
-    │ set lux  │    │   ↓      │    │          │
-    │ set dst  │    │ LED      │    │ vIP_PC13 │
+    │ lux  │    │   ↓      │    │          │
+    │ dist  │    │ LED      │    │ vIP_PC13 │
     │ help     │    │  Task    │    │  Start   │
     │          │    │          │    │  Task    │
     └─────────┘    │ KEY      │    │          │
@@ -150,7 +149,7 @@ Integrated_Project/
 
 ---
 
-## 📖 学习笔记
+## 📖 技术文档
 
 | 日期 | 主题 | 文档 |
 |------|------|------|
@@ -174,7 +173,7 @@ Integrated_Project/
 
 ---
 
-## 📚 心得分享
+## 📚 参考资料
 
 - [外设中英文对照表](心得分享/外设中英文对照表.md) — 13 大类，180+ 术语
 
@@ -193,6 +192,8 @@ Integrated_Project/
 - [x] FreeRTOS（任务、队列、信号量、互斥锁）
 - [x] DWT（微秒级延时）
 - [x] CLI（命令行交互控制）
+
+
 
 
 
