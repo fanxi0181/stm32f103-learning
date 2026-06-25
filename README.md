@@ -116,10 +116,11 @@ Integrated_Project/
 | 命令 | 参数 | 功能 |
 |------|------|------|
 | `led` | `on` / `off` / `flicker` | 控制 PA3 LED |
-| `dst` | `<value>` | 设置距离阈值（m），控制 PC13 |
-| `lux` | `<value>` | 设置电压阈值（V），控制 PC13 |
-| `set` | `save` / `load` | 阈值保存到 W25Q64 / 从 W25Q64 恢复 |
-| `help` | — | 显示命令列表 |
+| `dist` | — | 显示当前超声波距离 |
+| `lux` | — | 显示当前光敏电压 |
+| `set` | `vthr <V>` / `dthr <m>` | 设置电压/距离阈值 |
+| `w25q64` | `clear` | 擦除 Flash 并恢复默认值 |
+| `help` | — | 列出所有命令 |
 
 ---
 
@@ -192,6 +193,7 @@ Integrated_Project/
 - [x] FreeRTOS（任务、队列、信号量、互斥锁）
 - [x] DWT（微秒级延时）
 - [x] CLI（命令行交互控制）
+
 
 
 
