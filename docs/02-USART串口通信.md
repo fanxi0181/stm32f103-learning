@@ -200,9 +200,9 @@ BRR 编码：(39 << 4) | 1 = 0x271
 
 | 标志 | 含义 | 清除方式 |
 |------|------|----------|
-| **TXE** | 发送数据寄存器空 | 写 USART_SendData() 自动清 |
-| **TC** | 移位寄存器发送完毕 | **必须手动** USART_ClearFlag() |
-| **RXNE** | 接收缓冲区非空 | 读 USART_ReceiveData() 自动清 |
+| **TXE** | 发送数据寄存器空 | 写 `USART_SendData()` 自动清 |
+| **TC** | 移位寄存器发送完毕 | **必须手动** `USART_ClearFlag()` |
+| **RXNE** | 接收缓冲区非空 | 读 `USART_ReceiveData()` 自动清 |
 
 > TXE 表示可以写下一字节，TC 才表示总线完全空闲。发送后应等 TC。
 
@@ -236,12 +236,12 @@ while (等待条件) {
 
 | 错误 | 原因 | 修复 |
 |------|------|------|
-| 重映射不生效 | GPIO_PinRemapConfig(GPIOA, ...) 参数写错 | 改为 GPIO_Remap_USART1 |
-| 编译报错重复定义 | 同一函数内多次 GPIO_InitTypeDef xxx = {0} | 只定义一次，后面直接赋值 |
+| 重映射不生效 | `GPIO_PinRemapConfig(GPIOA, ...)` 参数写错 | 改为 `GPIO_Remap_USART1` |
+| 编译报错重复定义 | 同一函数内多次 `GPIO_InitTypeDef xxx = {0}` | 只定义一次，后面直接赋值 |
 | TX 发送不稳定 | PB6 Speed 只设了 2MHz | 改为 10MHz |
 | 超时不生效 | 超时判断写在 while 外面 | 移到 while 循环内部 |
-| 按钮无响应 | 忘了初始化 PA1 的 GPIO | 调用 init_buttonandled() |
-| 无数据时不停发消息 | 收到 0 字节 vs 收到字符没区分 | 用 `ret == 0 判断加 `else |
+| 按钮无响应 | 忘了初始化 PA1 的 GPIO | 调用 `init_buttonandled()` |
+| 无数据时不停发消息 | 收到 0 字节 vs 收到字符没区分 | 用 `ret == 0` 判断加 `else` |
 
 ---
 
