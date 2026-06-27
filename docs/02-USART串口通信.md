@@ -1,4 +1,4 @@
-# 6.2 USART 串口通信
+# 02 USART 串口通信
 
 > **芯片**：STM32F103C8T6 | **环境**：VSCode + Keil + Keil Assistant  
 > **主题**：USART 帧格式、波特率计算、重映射、超时保护、fputc 重定向、Doxygen 注释

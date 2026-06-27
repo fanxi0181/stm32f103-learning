@@ -1,4 +1,4 @@
-# 6.5 中断系统 — NVIC + EXTI
+# 05 中断系统 — NVIC + EXTI
 
 > **芯片**：STM32F103C8T6 | **环境**：VSCode + Keil + Keil Assistant  
 > **主题**：NVIC 优先级分组、USART 中断、EXTI 外部中断、轮询与中断冲突

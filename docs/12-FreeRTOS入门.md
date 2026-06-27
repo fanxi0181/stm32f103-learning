@@ -1,4 +1,4 @@
-# 6.15 FreeRTOS 入门 — 首个多任务 + 架构全景
+# 12 FreeRTOS 入门 — 首个多任务 + 架构全景
 
 > **芯片**：STM32F103C8T6 | **环境**：CubeMX + VSCode + Keil  
 > **主题**：FreeRTOS 工程搭建、三任务调度、内核架构、C 语言内存/作用域强化

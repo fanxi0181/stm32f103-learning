@@ -1,4 +1,4 @@
-# 6.10 主从模式 + PWM 信号测量
+# 09 主从模式 + PWM 信号测量
 
 > **芯片**：STM32F103C8T6 | **环境**：VSCode + Keil + Keil Assistant  
 > **主题**：从模式复位、主模式 TRGO、双定时器协同、PWM 周期/占空比测量
@@ -125,7 +125,7 @@ void Measure_PWM_state_machine(void)
 | **从模式** | 接受外部触发（TRGI）控制计数 | 复位、门控、触发、外部时钟 |
 | **主模式** | 通过 TRGO 输出内部事件 | 更新、使能、比较脉冲、OCxREF |
 
-> 6.10 用的从模式：`TIM_SlaveMode_Reset` — TRGI 上升沿自动清零 CNT
+> 09 用的从模式：`TIM_SlaveMode_Reset` — TRGI 上升沿自动清零 CNT
 
 ### 2. 为什么复位模式省掉了回绕计算
 

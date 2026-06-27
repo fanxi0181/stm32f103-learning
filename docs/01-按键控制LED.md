@@ -1,4 +1,4 @@
-# 6.1 按键控制 LED — GPIO 入门
+# 01 按键控制 LED — GPIO 入门
 
 > **芯片**：STM32F103C8T6 | **环境**：VSCode + Keil + Keil Assistant  
 > **主题**：GPIO 初始化、八种模式、位运算、指针/地址辨析、闭卷默写验证

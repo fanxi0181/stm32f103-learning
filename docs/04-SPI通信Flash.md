@@ -1,4 +1,4 @@
-# 6.4 SPI 通信 + W25Q64 Flash
+# 04 SPI 通信 + W25Q64 Flash
 
 > **芯片**：STM32F103C8T6 | **环境**：VSCode + Keil + Keil Assistant  
 > **主题**：SPI 全双工、W25Q64 Flash 读写、JTAG 释放、借时钟原理、I2C vs SPI 对比

@@ -1,4 +1,4 @@
-# 6.14 ADC 定时器触发注入序列 + 扫描模式
+# 11 ADC 定时器触发注入序列 + 扫描模式
 
 > **芯片**：STM32F103C8T6 | **环境**：VSCode + Keil + Keil Assistant  
 > **主题**：TIM1_TRGO 触发 ADC、注入序列、扫描模式、多路采集
@@ -227,4 +227,4 @@ ps_init → ps_send_pulse → ps_wait_conv_ok → ps_process → ps_interval
 
 - `TIM_SelectOutputTrigger` + ADC 外部触发 = 嵌入式"自动驾驶"——CPU 零参与，定时精度远超软件方案
 - 扫描模式让多路采集从"写 N 个状态机"变成"配 N 个通道"，硬件替你做了并行
-- 从 6.1 的点亮 LED 到 6.14 的双通道定时器触发 ADC 扫描——14 天，你的状态机框架已成熟到"填空即用"的程度
+- 从 01 的点亮 LED 到 11 的双通道定时器触发 ADC 扫描——14 天，你的状态机框架已成熟到"填空即用"的程度
