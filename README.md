@@ -37,7 +37,7 @@
 > `Integrated_Project.ioc` 为 CubeMX 工程文件，可双击打开查看时钟树（HSE 8MHz → PLL 72MHz）、外设引脚配置、FreeRTOS 参数等。CubeMX 生成代码已通过 `.gitignore` 排除。
 
 
-> `01-BareMetal-Practice/` 和 `02-Timer-Exercises/` 中的 `???` 标记为独立实现时的自我纠错注释，记录了从错误到正确的迭代过程。
+> `01-BareMetal-Practice/` 和 `02-Timer-Exercises/` 中的 `???` 标记了独立实现时踩过的坑和纠错过程（如忘记开启定时器 MOE 主输出使能、SPI 无总开关需在收发函数中控制、I2C 等待时间应放在循环外计算一次等），展示了从错误定位到修复的完整思路。
 >
 > 标准外设库（`std_periph_driver/`、`startup/`）和 CubeMX 生成文件已通过 `.gitignore` 排除。克隆后需自行添加 ST 标准外设库和 HAL 驱动到对应路径。
 
