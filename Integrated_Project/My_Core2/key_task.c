@@ -1,10 +1,12 @@
 // key_task.c —— 按键驱动：
 //   HAL_GPIO_EXTI_Callback → 释放信号量 → vIP_KEYTask 消抖 → 发送队列消息
 //   同时包含按键消抖状态机（key_idle → press_debounce → pressed → release_debounce）
+//可自主选择使用哪套方案
 
 #include "key_task.h"
 #include "uart_dma.h"
 
+//方案一 按键中断+信号量通知，delay消抖
 #ifdef KEY_MODULE_ENABLED
 
 // PA1/PA2 按键中断 → 释放二进制信号量通知 KEY 任务
@@ -45,7 +47,7 @@ void vIP_KEYTask(void *argument)
 #endif //KEY_MODULE_ENABLED
 
 
-
+//方案二 按下回调 状态机消抖
 #ifdef KEY_MODULE2_ENABLED
 
 #define KEY_DEBOUCNE_TIME_MS 20

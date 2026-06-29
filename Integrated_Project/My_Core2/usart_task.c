@@ -2,6 +2,7 @@
 //   中断收到一个字节 → 释放信号量 → 此任务拼成字符串 → 遇 \\r\\n 交给 CLI_Parse 解析
 
 #include "usart_task.h"
+#include <string.h>
 #include "cli.h"
 
 #ifdef USART_MODULE_ENABLED
@@ -27,31 +28,7 @@ void vIP_USARTTask(void *argument)
                 if(index > 0)
                 {
                     cmdbuff[index] = '\0';
-                    //CLI表出问题，也能使用1/2/3简单判定串口
-                    // if(strcmp(cmdbuff,"1") == 0)
-                    // {
-                    //     usartmessage.led_state = LED_State_ON;
-                    //     usartmessage.oled_state = OLED_State_Display1;
-                    // }
-                    // else if(strcmp(cmdbuff,"2") == 0)
-                    // {
-                    //     usartmessage.led_state = LED_State_OFF;
-                    //     usartmessage.oled_state = OLED_State_Display2;                        
-                    // }
-                    // else if((strcmp(cmdbuff,"3") == 0))
-                    // {
-                    //     usartmessage.led_state = LED_State_Flicker;
-                    //     usartmessage.oled_state = OLED_State_Display3;//恢复开始界面                       
-                    // }
-                    // else
-                    // {
-                    //     UART_DMA_Printf("Invalid_input\r\n");
-                    // }
-                    // if(osMessageQueuePut(USART_QueueHandle,&usartmessage,0,pdMS_TO_TICKS(100)) != osOK)
-                    // {
-                    //     UART_DMA_Printf("usartQueue_err\r\n");
-                    // }
-                    CLI_Parse(cmdbuff);
+                    CLI_Parse(cmdbuff);//解析命令
                     index = 0;
                     memset(cmdbuff,0,sizeof(cmdbuff));
                 }
@@ -88,4 +65,5 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 }
 
 #endif //USART_MODULE_ENABLED
+
 

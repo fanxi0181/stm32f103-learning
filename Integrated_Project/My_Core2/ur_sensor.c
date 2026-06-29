@@ -4,7 +4,6 @@
 
 #include "ur_sensor.h"
 #include "dwt.h"
-#include "app_common_err.h"
 
 #ifdef UR_SENSOR_ENABLED
 
@@ -96,9 +95,9 @@ float Ultrasonic_Ranging_State_Machine(void)
             {
                 distance = (width*1.0e-6f*340.0f)/2.0f;
                 g_state.ur_distance_m = distance;
-                SensorNotifyMsg notify = {.event = SENSOR_UR_UPDATAED};
+                SensorNotifyMsg notify = {.event = SENSOR_UR_UPDATED};
                 osMessageQueuePut(Sensor_Notify_QueueHandle,&notify,0,0);
-                                
+                
                 ur_err_outrange_count = 0;              
             }
             else
@@ -168,4 +167,5 @@ Sensor UR_Sensor = {
     .get_uint = ur_get_uint,
 };
 #endif //UR_SENSOR_ENABLED
+
 

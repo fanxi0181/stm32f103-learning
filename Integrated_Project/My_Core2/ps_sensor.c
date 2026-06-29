@@ -3,11 +3,10 @@
 //   结果存入 g_state.ps_voltage_v（单位 V，越大越暗）
 
 #include "ps_sensor.h"
-#include "app_common_err.h"
 
 #ifdef PS_SENSOR_ENABLED
 
-#define PS_INTERVAL_TIME 2000 //测量间隔 ms
+#define PS_INTERVAL_TIME 1000 //测量间隔 ms
 #define PS_TIM_HANDLE htim1
 #define PS_ADC_HANDLE hadc1
 //static uint32_t ps_currenttick = 0;
@@ -45,7 +44,6 @@ float Photosensitive_Sensor_State_Machine_IS(void)
             }
             else
             {
-                //UART_DMA_Printf("PS_ISR_TIMEOUT\r\n");
                 float err_v = PS_ERR_Wait_ADC_JEOC_TIMEOUT;
                 g_state.ps_voltage_v = err_v;
                 g_state.ps_state = PS_Idle;
@@ -59,7 +57,7 @@ float Photosensitive_Sensor_State_Machine_IS(void)
 
             v = (jdr * 3300) / 4095;
             g_state.ps_voltage_v = (v / 1000.0f);
-            SensorNotifyMsg notify = {.event = SENSOR_PS_UPDATAED};
+            SensorNotifyMsg notify = {.event = SENSOR_PS_UPDATED};
             osMessageQueuePut(Sensor_Notify_QueueHandle,&notify,0,0);
             g_state.ps_state = PS_Idle;
             break;
@@ -68,7 +66,7 @@ float Photosensitive_Sensor_State_Machine_IS(void)
         {
                 HAL_TIM_Base_Stop(&PS_TIM_HANDLE);
                 HAL_ADCEx_InjectedStop_IT(&PS_ADC_HANDLE);
-                osDelay(pdMS_TO_TICKS(PS_INTERVAL_TIME));//测量间隔 2s
+                osDelay(pdMS_TO_TICKS(PS_INTERVAL_TIME));//测量间隔 1s
                 g_state.ps_state = PS_Init;
             break;
         }
@@ -113,4 +111,5 @@ Sensor PS_Sensor = {
     .get_uint   = ps_get_uint,
 };
 #endif //PS_SENSOR_ENABLED
+
 

@@ -5,6 +5,7 @@
 #define INC_UART_DMA_H_
 
 #include "app_common.h"
+#include <stdio.h>
 #include "usart.h"
 
 #define ADD_DMA_USART huart1            // 使用的串口
@@ -20,10 +21,22 @@
     osMutexRelease(General_MutexHandle);\
 }while(0)
 
+// 错误打印 不依赖DMA
+#define UART_E_Printf(...) do{\
+    osMutexAcquire(General_MutexHandle,osWaitForever);\
+    int _len = sprintf((char*)tx_dma_buffer,__VA_ARGS__);\
+    HAL_UART_Transmit(&ADD_DMA_USART,tx_dma_buffer,_len);\
+    osMutexRelease(General_MutexHandle);\
+}while(0)
+
 extern uint8_t tx_dma_buffer[TX_DMA_BUFFER_SIZE];
 extern uint8_t rx_dma_buffer[RX_DMA_BUFFER_SIZE];
 extern uint8_t RX_RCV_Flish_Flag;
 
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size);
 
+// 警告打印
+#define UART_W_Printf(...) UART_DMA_Printf(__VA_ARGS__)
+
 #endif
+

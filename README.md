@@ -71,8 +71,9 @@ Integrated_Project/
 │   ├── ps_sensor.c/h        #   光敏传感器（ADC1 注入 + TIM1 TRGO）
 │   ├── ur_sensor.c/h        #   超声波测距（TIM2 输入捕获 CH1/CH2）
 │   ├── dwt.c/h              #   DWT 微秒级延时
-│   ├── sensor_interface.h    #   传感器统一接口抽象
-│   └── app_common_err.c/h    #   统一错误码 + 自动打印
+│   ├── config_service.c/h    #   配置管理层（Flash 读写 ↔ 全局状态）
+│   ├── sensor_common.h        #   传感器公共定义（信号量/状态机/错误码）
+│   └── sensor_interface.h    #   传感器统一接口抽象
 └── OLED_Driver/             # OLED 底层驱动（I2C）
 ```
 
@@ -193,6 +194,7 @@ Integrated_Project/
 | 16 | 按键消抖模块化封装 | [docs/16-按键消抖模块化.md](docs/16-按键消抖模块化.md) |
 | 17 | 模块化头文件 & DMA 调试 | [docs/17-模块化头文件与DMA调试.md](docs/17-模块化头文件与DMA调试.md) |
 | 18 | 传感器接口抽象 & LED 模块拆分 | [docs/18-传感器接口抽象与LED模块拆分.md](docs/18-传感器接口抽象与LED模块拆分.md) |
+| 19 | 配置服务层 & HardFault 调试 | [docs/19-配置服务层与HardFault调试.md](docs/19-配置服务层与HardFault调试.md) |
 
 ---
 

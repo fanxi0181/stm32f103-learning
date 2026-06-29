@@ -4,11 +4,12 @@
 //   CLI_Parse() 按空格切字符串 → 查表 → 调用 handler(argc, argv)
 //   添加新命令：写一个 cmd_xxx() + 在 cmd_table 里加一行即可
 #include "cli.h"
+#include <string.h>
+#include <stdlib.h>
 #include "uart_dma.h"
-#include "w25q64.h"
+#include "config_service.h"
 #include "ur_sensor.h"
 #include "ps_sensor.h"
-#include "app_common_err.h"
 
 #ifdef CLI_MODULE_ENABLED
 
@@ -196,7 +197,7 @@ static void cmd_w25q64(int argc, char *argv[])
 
     if (strcmp(argv[1], "clear") == 0) {
         // 执行擦除
-        if (W25Q64_Erase_Config_Sector()) {
+        if (Config_Erase()) {
             // 重置全局状态为默认值（与 app_globals.c 中的初始值保持一致）
             g_state.led = LED_State_OFF;
             g_state.oled = OLED_State_Display3;
@@ -226,6 +227,8 @@ static void cmd_help(int argc, char *argv[])
 }
 
 #endif // CLI_MODULE_ENABLED
+
+
 
 
 

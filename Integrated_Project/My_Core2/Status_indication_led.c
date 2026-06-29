@@ -14,8 +14,9 @@ void vIP_PC13_StartTask(void *argument)
 {
     for(;;)
     {
+        // 100ms 超时：有消息就消费，没消息也会继续循环判断闪烁
         SensorNotifyMsg msg;
-        osMessageQueueGet(Sensor_Notify_QueueHandle,&msg,0,osWaitForever);
+        osMessageQueueGet(Sensor_Notify_QueueHandle, &msg, 0, pdMS_TO_TICKS(100));
 
         if (g_state.ur_distance_m < g_state.distance_threshold && g_state.ur_distance_m > 0)
         {

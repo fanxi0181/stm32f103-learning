@@ -1,10 +1,9 @@
 // w25q64.c —— W25Q64 SPI Flash 驱动：
 //   vIP_W25Q64Task       ：上电/Load_Config 恢复，按键队列触发 Save/Load
-//   Load_Config          ：从 Flash 读取配置，恢复 g_state + 同步 OLED
-//   Save_Config          ：将 g_state 写入 Flash（LED/电压阈值/距离阈值）
 //   W25Q64_Save_All/Read_All/WaitBusy ：底层 SPI 读写擦除
 
 #include "w25q64.h"
+#include "config_service.h"
 #include "uart_dma.h"
 
 #ifdef W25Q64_MODULE_ENABLED
@@ -17,11 +16,11 @@
 #define W25Q64_HANDLE hspi1
 
 // 等待 KEY_Queue 消息 → Save_Config 或 Load_Config
-// Load_Config 恢复后：直接改 g_state.led（LED 任务读到） + 发 OLED 请求（OLED 任务更新屏幕）
+// 使用config_service 中的函数进行保存与恢复 此文件只进行flash操作
 void vIP_W25Q64Task(void *argument)
 {
     /* ---- 上电恢复（只执行一次） ---- */
-    Load_Config();
+    Config_Load();
 
     for(;;)
     {
@@ -30,72 +29,15 @@ void vIP_W25Q64Task(void *argument)
         {
             if(msg.w25q64_state == W25Q64_State_Save)
             {
-                Save_Config();   // 保存当前全部配置
+                Config_Save();   // 保存当前全部配置
             }
             else if(msg.w25q64_state == W25Q64_State_Recovery)
             {
-                Load_Config();   // 从 Flash 恢复配置
+                Config_Load();   // 从 Flash 恢复配置
             }
         }
         osDelay(pdMS_TO_TICKS(10));
     }
-}
-
-/* 计算 CRC */
-static uint32_t Config_CRC(const W25Q64_Config *cfg) 
-{
-    return (uint32_t)cfg->led_state +
-           (uint32_t)(cfg->voltage_threshold * 1000.0f) +
-           (uint32_t)(cfg->distance_threshold * 1000.0f);
-}
-
-/* 从 Flash 读取配置，校验后应用到全局状态，并打印恢复信息 */
-static void Load_Config(void) 
-{
-    W25Q64_Config cfg;
-    W25Q64_Read_All(&cfg);   // 一次读出整个结构体
-
-    uint32_t calc_crc = Config_CRC(&cfg);
-    if (cfg.crc == calc_crc) 
-    {
-        // 数据有效，更新全局状态
-        g_state.led = Store_to_LED_State((StoredLedState)cfg.led_state);
-        g_state.voltage_threshold = cfg.voltage_threshold;
-        g_state.distance_threshold = cfg.distance_threshold;
-
-        UART_DMA_Printf("Restored: LED=%s, Vthr_threshold=%.2fV, Dthr_threshold=%.2fm\r\n",
-                        (g_state.led == LED_State_ON) ? "ON" : "OFF",
-                        g_state.voltage_threshold,
-                        g_state.distance_threshold);
-
-        // 同步 OLED 显示（与 CLI 保持同一契约：改状态 → 发 OLED 请求）
-        OLEDDisplayRequest oled_req = {
-            .oled_state = (g_state.led == LED_State_ON) ? OLED_State_Display1 : OLED_State_Display2,
-            .force_refresh = true
-        };
-        osMessageQueuePut(OLED_Display_QueueHandle, &oled_req, 0, 0);
-    } 
-    else 
-    {
-        UART_DMA_Printf("Flash config invalid, using defaults.\r\n");
-    }
-}
-
-/* 从全局状态构造配置并写入 Flash，打印保存信息 */
-static void Save_Config(void) 
-{
-    W25Q64_Config cfg;
-    cfg.led_state = (uint8_t)LED_State_to_Store(g_state.led);
-    cfg.voltage_threshold = g_state.voltage_threshold;
-    cfg.distance_threshold = g_state.distance_threshold;
-    cfg.crc = Config_CRC(&cfg);
-
-    W25Q64_Save_All(&cfg);
-
-    UART_DMA_Printf("Saved: LED=%s, Vthr_threshold=%.2fV, Dthr_threshold=%.2fm\r\n",
-                    (g_state.led == LED_State_ON) ? "ON" : "OFF",
-                    g_state.voltage_threshold,
-                    g_state.distance_threshold);
 }
 
 // 擦除配置扇区（扇区 0），用于 "w25q64 clear" 命令
@@ -122,11 +64,8 @@ bool W25Q64_Erase_Config_Sector(void)
 }
 
 // 保存 结构体到 Flash：写使能 → 擦除扇区0 → 写使能 → 写入
-void W25Q64_Save_All(W25Q64_Config *data)
+void W25Q64_Save_All(void *data)
 {
-    data->crc = data->led_state + (uint32_t)(data->voltage_threshold * 1000)
-        + (uint32_t)(data->distance_threshold * 1000);
-
     uint8_t Buffer[5];
     Buffer[0] = 0x06;//写使能
     HAL_GPIO_WritePin(W25Q64_CS_PORT,W25Q64_CS_PIN ,GPIO_PIN_RESET);
@@ -163,7 +102,7 @@ void W25Q64_Save_All(W25Q64_Config *data)
 }
 
 // 读取扇区结构体
-void W25Q64_Read_All(W25Q64_Config *data)
+void W25Q64_Read_All(void *data)
 {
     uint8_t cmd[4] = {0x03,0x00,0x00,0x00};
     W25Q64_WaitBusy(); 
